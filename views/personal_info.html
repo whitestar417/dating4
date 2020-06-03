@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Personal Info</title>
+    <include href="includes/header.htm"></include>
+</head>
+
+<body>
+<nav class="navbar navbar-light bg-light mb-2">
+    <a class="navbar-brand" href="./">My Pet Dating App</a>
+</nav>
+
+<div class="container">
+    <h1>Personal Information</h1>
+    <hr>
+
+    <form action="#" method="post" class="form-horizontal">
+        <div class="row">
+            <div class="col-8">
+
+                <!-- get personal information -->
+                <div class="form-group">
+                    <label for="fName"><strong>First Name</strong></label>
+                    <input class="form-control" type="text" name="fName" id="fName" value="{{ @SESSION['fName'] }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="lName"><strong>Last Name</strong></label>
+                    <input class="form-control" type="text" name="lName" id="lName" value="{{ @SESSION['lName'] }}">
+                </div>
+                <check if="{{ isset(@errors['name']) }}">
+                    <p class="text-danger">{{ @errors['name'] }}</p>
+                </check>
+
+                <div class="form-group">
+                    <label for="age"><strong>Age</strong></label>
+                    <input class="form-control" type="text" name="age" id="age" value="{{ @SESSION['age'] }}">
+                    <check if="{{ isset(@errors['age']) }}">
+                        <p class="text-danger">{{ @errors['age'] }}</p>
+                    </check>
+                </div>
+
+                <label><strong>Gender</strong></label><br>
+
+                <div class="form-check-inline">
+                    <repeat group="{{ @genders }}" value="{{ @theGender }}">
+                        <label><input type="radio"
+                                      name="gender"
+                                      id="{{ @theGender }}"
+                                      value="{{ @theGender }}"
+                            <check if="{{ @theGender == @SESSION['gender'] }}" >
+                                checked="checked"
+                            </check>
+                            > {{ ucfirst(@theGender) }}&nbsp
+                            </input></label>
+                    </repeat>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone"><strong>Phone Number</strong></label>
+                    <input class="form-control" type="text" name="phone" id="phone" value="{{ @SESSION['phone'] }}">
+                    <check if="{{ isset(@errors['phone']) }}">
+                        <p class="text-danger">{{ @errors['phone'] }}</p>
+                    </check>
+                </div>
+            </div>
+
+            <div class="col-4">
+                <div class="container card bg-light rounded text-center">
+                    <p><strong>Note:</strong> All information entered is protected by our <a href="">
+                    privacy policy</a>. Profile information can only be viewed by others with your permission.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-12">
+                <div class="text-right">
+                    <button type="submit" class="btn btn-primary">Next ></button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+<include href="includes/footer.htm"></include>
+</body>
+</html>

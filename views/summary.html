@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Summary</title>
+    <include href="includes/header.htm"></include>
+</head>
+
+<body>
+<nav class="navbar navbar-light bg-light mb-2">
+    <a class="navbar-brand" href="./">My Pet Dating App</a>
+</nav>
+
+<div class="row">
+    <div class="col-6">
+        <p class="card mb-0 ml-3 p-2">Name: {{ @SESSION.fName }} {{ @SESSION.lName}} </p>
+        <p class="card mb-0 ml-3 p-2">Age: {{ @SESSION.age }} </p>
+        <p class="card mb-0 ml-3 p-2">Gender: {{ @SESSION.gender }} </p>
+        <p class="card mb-0 ml-3 p-2">Phone Number: {{ @SESSION.phone }} </p>
+        <p class="card mb-0 ml-3 p-2">E-Mail: {{ @SESSION.email }} </p>
+        <p class="card mb-0 ml-3 p-2">State: {{ @SESSION.state }} </p>
+        <p class="card mb-0 ml-3 p-2">Seeking: {{ @SESSION.seeking }} </p>
+        <p class="card mb-0 ml-3 p-2">Interests:
+            <check if="{{ isset(@SESSION.indoors) }}">
+                {{ implode(@SESSION.indoors, ' ') }}
+            </check>
+            <check if="{{ isset(@SESSION.outdoors) }}">
+                {{ implode(@SESSION.outdoors, ' ') }}
+            </check>
+        </p>
+    </div>
+
+    <div class="col-md-6">
+        <img class="img-fluid rounded-lg" src="images/profile.png" alt="figure profile">
+        <h3>Biography</h3>
+        <p>{{ @SESSION.bio }}</p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="text-center">
+            <br><button type="submit" class="btn btn-primary">Contact Me!</button>
+        </div>
+    </div>
+</div>
+
+
+
+<include href="includes/footer.htm"></include>
+</body>
+</html>

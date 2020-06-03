@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Interests</title>
+    <include href="includes/header.htm"></include>
+</head>
+
+<body>
+<nav class="navbar navbar-light bg-light mb-2">
+    <a class="navbar-brand" href="./">My Pet Dating App</a>
+</nav>
+
+    <div class="container mt-5">
+        <h1>Interests</h1>
+        <hr>
+
+        <form action="#" method="post">
+
+            <label><strong>Indoor Interests</strong></label>
+            <check if="{{ isset(@errors['indoors']) }}">
+                <p class="text-danger">{{ @errors['indoors'] }}</p>
+            </check>
+
+            <div class="row mb-3 px-3">
+                <repeat group="{{ @indoors }}" value="{{ @indoor }}">
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="{{ @indoor }}" id="{{ @indoor }}" name="indoors[]">
+                            <label class="form-check-label" for="{{ @indoor }}">{{ @indoor }}</label>
+                        </div>
+                    </div>
+                </repeat>
+            </div>
+
+            <label><strong>Outdoor Interests</strong></label>
+            <check if="{{ isset(@errors['outdoors']) }}">
+                <p class="text-danger">{{ @errors['outdoors'] }}</p>
+            </check>
+
+            <div class="row mb-3 px-3">
+                <repeat group="{{ @outdoors }}" value="{{ @outdoor }}">
+                    <div class="col-md-3">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" value="{{ @outdoor }}" id="{{ @outdoor }}" name="outdoors[]">
+                            <label class="form-check-label" for="{{ @outdoor }}">{{ @outdoor }}</label>
+                        </div>
+                    </div>
+                </repeat>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-primary">Next ></button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+
+<include href="includes/footer.htm"></include>
+</body>
+</html>
