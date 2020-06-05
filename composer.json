@@ -1,5 +1,5 @@
 {
-  "name": "328/dating",
+  "name": "328/dating4",
   "authors": [
     {
       "name": "David Haas",
@@ -8,5 +8,8 @@
   ],
   "require": {
     "bcosca/fatfree-core": "dev-master"
+  },
+  "autoload": {
+    "classmap": ["classes/", "model/", "controllers/"]
   }
 }
