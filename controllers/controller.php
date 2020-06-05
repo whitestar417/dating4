@@ -6,15 +6,17 @@
 class Controller
 {
     private $_f3; //router
+    private $_validator; //validation object
 
     /**
      * Controller constructor.
      * @param $f3
      * @param $validator
      */
-    public function __construct($f3)
+    public function __construct($f3, $validator)
     {
         $this->_f3 = $f3;
+        $this->_validator = $validator;
     }
 
     /**
@@ -36,7 +38,7 @@ class Controller
         {
             $_SESSION['gender'] = $_POST['gender'];
 
-            if (validName($_POST['fName'], $_POST['lName']))
+            if ($this->_validator->validName($_POST['fName'], $_POST['lName']))
             {
                 $_SESSION['fName'] = $_POST['fName'];
                 $_SESSION['lName'] = $_POST['lName'];
@@ -47,7 +49,7 @@ class Controller
                 $this->_f3->set("errors['name']", "Please enter a valid name.");
             }
 
-            if (validAge($_POST['age']))
+            if ($this->_validator->validAge($_POST['age']))
             {
                 $_SESSION['age'] = $_POST['age'];
             }
@@ -57,7 +59,7 @@ class Controller
                 $this->_f3->set("errors['age']", "Please enter a valid age.");
             }
 
-            if (validPhone($_POST['phone']))
+            if ($this->_validator->validPhone($_POST['phone']))
             {
                 $_SESSION['phone'] = $_POST['phone'];
             }
@@ -94,7 +96,7 @@ class Controller
             $_SESSION['seeking'] = $_POST['seeking'];
             $_SESSION['bio'] = $_POST['bio'];
 
-            if (validEmail($_POST['email']))
+            if ($this->_validator->validEmail($_POST['email']))
             {
                 //Data is valid
                 $_SESSION['email'] = $_POST['email'];
@@ -126,7 +128,7 @@ class Controller
         //Check if the form has been posted
         if ($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            if (validIndoor($_POST['indoors']))
+            if ($this->_validator->validIndoor($_POST['indoors']))
             {
                 $_SESSION['indoors'] = $_POST['indoors'];
             }
@@ -136,7 +138,7 @@ class Controller
                 $this->_f3->set("errors['indoors']", "Please do not spoof me.");
             }
 
-            if (validOutdoor($_POST['outdoors']))
+            if ($this->_validator->validOutdoor($_POST['outdoors']))
             {
                 $_SESSION['outdoors'] = $_POST['outdoors'];
             }
