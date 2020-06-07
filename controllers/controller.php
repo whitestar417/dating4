@@ -38,7 +38,7 @@ class Controller
         {
             $_SESSION['gender'] = $_POST['gender'];
 
-            if ($this->_validator->validName($_POST['fName'], $_POST['lName']))
+            if ($GLOBALS['validator']->validName($_POST['fName'], $_POST['lName']))
             {
                 $_SESSION['fName'] = $_POST['fName'];
                 $_SESSION['lName'] = $_POST['lName'];
@@ -49,7 +49,7 @@ class Controller
                 $this->_f3->set("errors['name']", "Please enter a valid name.");
             }
 
-            if ($this->_validator->validAge($_POST['age']))
+            if ($GLOBALS['validator']->validAge($_POST['age']))
             {
                 $_SESSION['age'] = $_POST['age'];
             }
@@ -59,7 +59,7 @@ class Controller
                 $this->_f3->set("errors['age']", "Please enter a valid age.");
             }
 
-            if ($this->_validator->validPhone($_POST['phone']))
+            if ($GLOBALS['validator']->validPhone($_POST['phone']))
             {
                 $_SESSION['phone'] = $_POST['phone'];
             }
@@ -69,7 +69,7 @@ class Controller
                 $this->_f3->set("errors['phone']", "Please enter a valid phone number.");
             }
 
-            if (empty($f3['errors'])) {
+            if (empty($this->_f3['errors'])) {
 
                 //Redirect to the profile route
                 $this->_f3->reroute("profile");
@@ -96,7 +96,7 @@ class Controller
             $_SESSION['seeking'] = $_POST['seeking'];
             $_SESSION['bio'] = $_POST['bio'];
 
-            if ($this->_validator->validEmail($_POST['email']))
+            if ($GLOBALS['validator']->validEmail($_POST['email']))
             {
                 //Data is valid
                 $_SESSION['email'] = $_POST['email'];
