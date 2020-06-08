@@ -12,19 +12,19 @@
 
 <div class="row">
     <div class="col-6">
-        <p class="card mb-0 ml-3 p-2">Name: {{ @SESSION.fName }} {{ @SESSION.lName}} </p>
-        <p class="card mb-0 ml-3 p-2">Age: {{ @SESSION.age }} </p>
-        <p class="card mb-0 ml-3 p-2">Gender: {{ @SESSION.gender }} </p>
-        <p class="card mb-0 ml-3 p-2">Phone Number: {{ @SESSION.phone }} </p>
-        <p class="card mb-0 ml-3 p-2">E-Mail: {{ @SESSION.email }} </p>
-        <p class="card mb-0 ml-3 p-2">State: {{ @SESSION.state }} </p>
-        <p class="card mb-0 ml-3 p-2">Seeking: {{ @SESSION.seeking }} </p>
+        <p class="card mb-0 ml-3 p-2">Name: {{ @SESSION.profile->getFname() }} {{ @SESSION.profile->getLName() }} </p>
+        <p class="card mb-0 ml-3 p-2">Age: {{ @SESSION.profile->getAge() }} </p>
+        <p class="card mb-0 ml-3 p-2">Gender: {{ @SESSION.profile->getGender() }} </p>
+        <p class="card mb-0 ml-3 p-2">Phone Number: {{ @SESSION.profile->getPhone() }} </p>
+        <p class="card mb-0 ml-3 p-2">E-Mail: {{ @SESSION.profile->getEmail() }} </p>
+        <p class="card mb-0 ml-3 p-2">State: {{ @SESSION.profile->getState() }} </p>
+        <p class="card mb-0 ml-3 p-2">Seeking: {{ @SESSION.profile->getSeeking() }} </p>
         <p class="card mb-0 ml-3 p-2">Interests:
-            <check if="{{ isset(@SESSION.indoors) }}">
-                {{ implode(@SESSION.indoors, ' ') }}
+            <check if="{{ !empty(@SESSION.profile->getIndoors()) }}">
+                {{ implode(@SESSION.profile->getIndoors(), ' ') }}
             </check>
-            <check if="{{ isset(@SESSION.outdoors) }}">
-                {{ implode(@SESSION.outdoors, ' ') }}
+            <check if="{{ !empty(@SESSION.profile->getOutdoors()) }}">
+                {{ implode(@SESSION.profile->getOutdoors(), ' ') }}
             </check>
         </p>
     </div>

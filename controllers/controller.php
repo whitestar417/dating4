@@ -29,19 +29,25 @@ class Controller
     }
 
     /**
-     * Process the order route
+     * Process the personal information
      */
     public function personal_info()
     {
         //Check if the form has been posted
         if ($_SERVER['REQUEST_METHOD'] == 'POST')
         {
-            $_SESSION['gender'] = $_POST['gender'];
+            if(isset($_POST['membership'])) {
+                $_SESSION['profile'] = new PremiumMember();
+            }
+            else {
+                $_SESSION['profile'] = new Member();
+            }
 
-            if ($GLOBALS['validator']->validName($_POST['fName'], $_POST['lName']))
-            {
-                $_SESSION['fName'] = $_POST['fName'];
-                $_SESSION['lName'] = $_POST['lName'];
+            $_SESSION['profile']->setGender($_POST['gender']);
+
+            if ($GLOBALS['validator']->validName($_POST['fName'], $_POST['lName'])) {
+                $_SESSION['profile']->setFname($_POST['fName']);
+                $_SESSION['profile']->setLname($_POST['lName']);
             }
             else
             {
@@ -49,9 +55,8 @@ class Controller
                 $this->_f3->set("errors['name']", "Please enter a valid name.");
             }
 
-            if ($GLOBALS['validator']->validAge($_POST['age']))
-            {
-                $_SESSION['age'] = $_POST['age'];
+            if ($GLOBALS['validator']->validAge($_POST['age'])) {
+                $_SESSION['profile']->setAge($_POST['age']);
             }
             else
             {
@@ -59,9 +64,8 @@ class Controller
                 $this->_f3->set("errors['age']", "Please enter a valid age.");
             }
 
-            if ($GLOBALS['validator']->validPhone($_POST['phone']))
-            {
-                $_SESSION['phone'] = $_POST['phone'];
+            if ($GLOBALS['validator']->validPhone($_POST['phone'])) {
+                $_SESSION['profile']->setPhone($_POST['phone']);
             }
             else
             {
@@ -83,26 +87,32 @@ class Controller
     }
 
     /**
-     *
+     * Process the profile information
      */
     public function profile()
     {
+        global $profile;
         $states = getStates();
 
         //Check if the form has been posted
-        if ($_SERVER['REQUEST_METHOD'] == 'POST')
-        {
-            $_SESSION['state'] = $_POST['state'];
-            $_SESSION['seeking'] = $_POST['seeking'];
-            $_SESSION['bio'] = $_POST['bio'];
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $_SESSION['profile']->setState($_POST['state']);
+            $_SESSION['profile']->setSeeking($_POST['seeking']);
+            $_SESSION['profile']->setBio($_POST['bio']);
 
-            if ($GLOBALS['validator']->validEmail($_POST['email']))
-            {
+            if ($GLOBALS['validator']->validEmail($_POST['email'])) {
                 //Data is valid
-                $_SESSION['email'] = $_POST['email'];
+                $_SESSION['profile']->setEmail($_POST['email']);
 
-                //Redirect to the interests route
-                $this->_f3->reroute("interests");
+                if (isset($_POST['membership'])) {
+                    //Redirect members to the interests
+                    $this->_f3->reroute("interests");
+                }
+                else {
+                    //Redirect non-members to the summary
+                    $this->_f3->reroute("summary");
+                }
+
             }
             else
             {
@@ -118,19 +128,18 @@ class Controller
     }
 
     /**
-     *
+     * Process the interests
      */
     public function interests()
     {
+        global $profile;
         $indoors = getIndoorInterests();
         $outdoors = getOutdoorInterests();
 
         //Check if the form has been posted
-        if ($_SERVER['REQUEST_METHOD'] == 'POST')
-        {
-            if ($this->_validator->validIndoor($_POST['indoors']))
-            {
-                $_SESSION['indoors'] = $_POST['indoors'];
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            if ($this->_validator->validIndoor($_POST['indoors'])) {
+                $_SESSION['profile']->setInDoorIntersts($_POST['indoors']);
             }
             else
             {
@@ -138,9 +147,8 @@ class Controller
                 $this->_f3->set("errors['indoors']", "Please do not spoof me.");
             }
 
-            if ($this->_validator->validOutdoor($_POST['outdoors']))
-            {
-                $_SESSION['outdoors'] = $_POST['outdoors'];
+            if ($this->_validator->validOutdoor($_POST['outdoors'])) {
+                $_SESSION['profile']->setOutDoorIntersts($_POST['outdoors']);
             }
             else
             {
@@ -162,10 +170,11 @@ class Controller
     }
 
     /**
-     *
+     * Print a summary of the profile
      */
     public function summary()
     {
+        global $profile;
         $view = new Template();
         echo $view->render('views/summary.html');
 

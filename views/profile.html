@@ -33,7 +33,7 @@
                             <option>State</option>
                                 <repeat group="{{ @states }}" value="{{ @state }}">
                                     <option>
-                                        <check if="{{ @state == @SESSION['state'] }}">selected</check>
+                                        <check if="{{ @state == @SESSION.profile->getState() }}">selected</check>
                                         {{ ucfirst(@state) }}
                                     </option>
                                 </repeat>
@@ -46,7 +46,7 @@
                                               name="seeking"
                                               id="{{ @theGender }}"
                                               value="{{ @theGender }}"
-                                    <check if="{{ @theGender == @SESSION['seeking'] }}" >
+                                    <check if="{{ @theGender == @SESSION.profile->getSeeking() }}" >
                                         checked="checked"
                                     </check>
                                     > {{ ucfirst(@theGender) }}
@@ -59,7 +59,7 @@
                 <div class="col-6">
                     <div class="form-group">
                         <label for="bio"><strong>Biography</strong></label>
-                        <textarea class="form-control" name="bio" id="bio" rows="8">{{ @SESSION['bio'] }}</textarea>
+                        <textarea class="form-control" name="bio" id="bio" rows="8">{{ @SESSION.profile->getBio() }}</textarea>
                     </div>
                 </div>
             </div>

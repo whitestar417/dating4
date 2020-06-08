@@ -21,12 +21,12 @@
                 <!-- get personal information -->
                 <div class="form-group">
                     <label for="fName"><strong>First Name</strong></label>
-                    <input class="form-control" type="text" name="fName" id="fName" value="{{ @SESSION['fName'] }}">
+                    <input class="form-control" type="text" name="fName" id="fName" value="{{ @SESSION.profile->getFname() }}">
                 </div>
 
                 <div class="form-group">
                     <label for="lName"><strong>Last Name</strong></label>
-                    <input class="form-control" type="text" name="lName" id="lName" value="{{ @SESSION['lName'] }}">
+                    <input class="form-control" type="text" name="lName" id="lName" value="{{ @SESSION.profile->getLname() }}">
                 </div>
                 <check if="{{ isset(@errors['name']) }}">
                     <p class="text-danger">{{ @errors['name'] }}</p>
@@ -34,7 +34,7 @@
 
                 <div class="form-group">
                     <label for="age"><strong>Age</strong></label>
-                    <input class="form-control" type="text" name="age" id="age" value="{{ @SESSION['age'] }}">
+                    <input class="form-control" type="text" name="age" id="age" value="{{ @SESSION.profile->getAge() }}">
                     <check if="{{ isset(@errors['age']) }}">
                         <p class="text-danger">{{ @errors['age'] }}</p>
                     </check>
@@ -48,7 +48,7 @@
                                       name="gender"
                                       id="{{ @theGender }}"
                                       value="{{ @theGender }}"
-                            <check if="{{ @theGender == @SESSION['gender'] }}" >
+                            <check if="{{ @theGender == @SESSION.profile->getGender() }}" >
                                 checked="checked"
                             </check>
                             > {{ ucfirst(@theGender) }}&nbsp
@@ -58,7 +58,7 @@
 
                 <div class="form-group">
                     <label for="phone"><strong>Phone Number</strong></label>
-                    <input class="form-control" type="text" name="phone" id="phone" value="{{ @SESSION['phone'] }}">
+                    <input class="form-control" type="text" name="phone" id="phone" value="{{ @SESSION.profile->getPhone() }}">
                     <check if="{{ isset(@errors['phone']) }}">
                         <p class="text-danger">{{ @errors['phone'] }}</p>
                     </check>
