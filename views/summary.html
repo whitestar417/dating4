@@ -19,14 +19,16 @@
         <p class="card mb-0 ml-3 p-2">E-Mail: {{ @SESSION.profile->getEmail() }} </p>
         <p class="card mb-0 ml-3 p-2">State: {{ @SESSION.profile->getState() }} </p>
         <p class="card mb-0 ml-3 p-2">Seeking: {{ @SESSION.profile->getSeeking() }} </p>
-        <p class="card mb-0 ml-3 p-2">Interests:
-            <check if="{{ !empty(@SESSION.profile->getIndoors()) }}">
-                {{ implode(@SESSION.profile->getIndoors(), ' ') }}
-            </check>
-            <check if="{{ !empty(@SESSION.profile->getOutdoors()) }}">
-                {{ implode(@SESSION.profile->getOutdoors(), ' ') }}
-            </check>
-        </p>
+        <check if="{{ $_SESSION['profile'] instanceof PremiumMember }}">
+            <p class="card mb-0 ml-3 p-2">Interests:
+                <check if="{{ !empty(@SESSION.profile->getInDoorInterests()) }}">
+                    {{ implode(@SESSION.profile->getInDoorInterests(), ' ') }}
+                </check>
+                <check if="{{ !empty(@SESSION.profile->getOutDoorInterests()) }}">
+                    {{ implode(@SESSION.profile->getOutDoorInterests(), ' ') }}
+                </check>
+            </p>
+        </check>
     </div>
 
     <div class="col-md-6">

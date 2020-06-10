@@ -14,7 +14,7 @@ class Validate
     }
 
     /* Return a value indicating if age is valid
-       Valid meals are between 18 and 118
+       Valid age is between 18 and 118
        @param String $age
        @return boolean
     */

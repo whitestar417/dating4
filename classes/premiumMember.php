@@ -2,7 +2,7 @@
 
 /*
  * Premium Memberbership class
- * includes interests
+ * Inherits from Member class and includes interests
  * @author David Haas
  * @version 1.0
  * @date 6/4/20

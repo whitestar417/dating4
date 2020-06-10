@@ -23,6 +23,9 @@ $f3 = Base::instance();
 $validator = new Validate();
 $controller = new Controller($f3, $validator);
 
+//echo "<p>Member Object</p>";
+//var_dump($f3->get('membership'));
+
 //Define a default route
 $f3->route('GET /', function() {
     $GLOBALS['controller']->home();

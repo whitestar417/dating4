@@ -2,7 +2,7 @@
 
 /*
  * Membership class for website
- * holds personal information
+ * holds personal profile information
  * @author David Haas
  * @version 1.0
  * @date 6/4/20
@@ -24,7 +24,10 @@ class Member
      */
     public function getFname()
     {
-        return $this->_fname;
+        if ($this->_fname !== null) {
+            return $this->_fname;
+        }
+        return "";
     }
 
     /**
@@ -32,7 +35,10 @@ class Member
      */
     public function setFname($fname)
     {
-        $this->_fname = $fname;
+        if ($this->_lname !== null) {
+            return $this->_lname;
+        }
+        return "";
     }
 
     /**
